@@ -30,7 +30,6 @@ Install dependencies from `requirements.txt`:
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
-pip install requests
 ```
 
 Download and prepare the yield data:
