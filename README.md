@@ -43,19 +43,66 @@ Download and prepare the yield data:
 python data.py
 ```
 
-Optional: enable macro/FRED overlays by setting `FRED_API_KEY` (do not commit this key).
+## Set FRED API Key (for Macro Context tab)
 
-Environment variable:
+If you do not set the key, the dashboard still runs, but FRED-powered macro overlays are disabled.
+
+### Option A (recommended): Streamlit secrets file
+
+1. In the project root, create the secrets folder:
 
 ```bash
-export FRED_API_KEY="your_api_key_here"
+mkdir -p .streamlit
 ```
 
-Or Streamlit secrets (`.streamlit/secrets.toml`):
+2. Create `.streamlit/secrets.toml` with this exact content:
 
 ```toml
 FRED_API_KEY = "your_api_key_here"
 ```
+
+3. Start the dashboard:
+
+```bash
+streamlit run app.py
+```
+
+4. Check the sidebar:
+- If configured correctly, you should see `FRED key detected`.
+- If not, you will see `FRED key missing`.
+
+### Option B: environment variable
+
+Set it for the current terminal session:
+
+```bash
+export FRED_API_KEY="your_api_key_here"
+streamlit run app.py
+```
+
+To persist it on macOS `zsh`, add it to your shell config:
+
+```bash
+echo 'export FRED_API_KEY="your_api_key_here"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+### Security notes
+
+- Never commit your key to git.
+- `.gitignore` already excludes `.streamlit/` and `.env*`.
+- If a key is ever exposed, rotate/regenerate it from your FRED account.
+
+### Troubleshooting
+
+- If you still see `FRED key missing`, fully stop and restart Streamlit.
+- If using env vars, verify the key is set in the same shell where you run Streamlit:
+
+```bash
+echo "$FRED_API_KEY"
+```
+
+- If using secrets file, verify the path is exactly `.streamlit/secrets.toml` (in project root).
 
 Run the dashboard:
 
