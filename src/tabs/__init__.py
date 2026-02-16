@@ -132,7 +132,6 @@ def inject_dashboard_styles() -> None:
             [data-testid="stMetric"] {
                 border: 1px solid #D7DDE5;
                 border-radius: 10px;
-                background-color: #FFFFFF;
                 padding: 0.35rem 0.75rem;
             }
             [data-testid="stHorizontalBlock"] {

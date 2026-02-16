@@ -6,12 +6,6 @@ import streamlit as st
 
 BASE_THEME_CSS = """
 <style>
-    .stApp {
-        background:
-            radial-gradient(circle at 85% 5%, rgba(15, 76, 129, 0.16), transparent 36%),
-            radial-gradient(circle at 15% 15%, rgba(47, 106, 79, 0.14), transparent 38%),
-            linear-gradient(180deg, #f4f7fb 0%, #eef2f8 100%);
-    }
     .block-container {
         max-width: 1840px;
         padding-top: 1.2rem;
@@ -23,11 +17,9 @@ BASE_THEME_CSS = """
         color: #1d2733;
     }
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #ffffff 0%, #f6f8fc 100%);
         border-right: 1px solid #d7dde5;
     }
     [data-testid="stMetric"] {
-        background-color: #ffffff;
         border-radius: 10px;
         border: 1px solid #d7dde5;
         padding: 0.35rem 0.75rem;
