@@ -14,7 +14,12 @@
 
 This project downloads and analyzes the U.S. Treasury zero-coupon yield curve. It includes:
 - `data.py` to download and clean the full historical yield curve dataset (Gurkaynak-Sack-Wright data from the Federal Reserve).
-- `app.py` to run an interactive Streamlit dashboard.
+- `app.py` to launch an interactive Streamlit dashboard.
+- `src/` as a modular dashboard package with:
+  - `src/data/` loaders and FRED API connectors.
+  - `src/transforms/` spread/factor/regime analytics.
+  - `src/charts/` reusable Altair chart builders.
+  - `src/tabs/` tab-level dashboard renderers.
 
 ## Installation
 
@@ -38,8 +43,41 @@ Download and prepare the yield data:
 python data.py
 ```
 
+Optional: enable macro/FRED overlays by setting `FRED_API_KEY` (do not commit this key).
+
+Environment variable:
+
+```bash
+export FRED_API_KEY="your_api_key_here"
+```
+
+Or Streamlit secrets (`.streamlit/secrets.toml`):
+
+```toml
+FRED_API_KEY = "your_api_key_here"
+```
+
 Run the dashboard:
 
 ```bash
 streamlit run app.py
+```
+
+## Dashboard Tabs
+
+- `Curve`: snapshot and date-over-date curve comparison.
+- `Historical`: multi-maturity yield history with date-range filtering.
+- `Spreads`: key spread monitoring plus custom spread builder.
+- `Factors`: level, slope, curvature decomposition.
+- `Heatmap`: yield levels and daily change heatmaps.
+- `Volatility`: rolling realized volatility by maturity.
+- `Regimes`: regime timeline and distribution diagnostics.
+- `Macro Context`: FRED overlays with recession shading.
+
+## Testing
+
+Run unit tests:
+
+```bash
+pytest
 ```
