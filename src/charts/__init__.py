@@ -22,7 +22,7 @@ REGIME_COLORS = {
     "Low-rate": "#2F4B7C",
     "Neutral": "#657184",
 }
-GRID_COLOR = "#D7DDE5"
+GRID_COLOR = "rgba(215, 221, 229, 0.28)"
 AXIS_LABEL_COLOR = "#2A3647"
 TITLE_COLOR = "#1D2733"
 

@@ -6,7 +6,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from src.charts import build_curve_chart
+from src.charts import GRID_COLOR, build_curve_chart
 from src.state import DashboardState
 
 from . import format_rate, format_spread
@@ -50,7 +50,7 @@ def _render_overlay_chart(primary: pd.DataFrame, compare: pd.DataFrame) -> alt.C
             ],
         )
         .properties(height=510, title="Yield Curve Comparison")
-        .configure_axis(labelColor="#2A3647", titleColor="#2A3647", gridColor="#D7DDE5")
+        .configure_axis(labelColor="#2A3647", titleColor="#2A3647", gridColor=GRID_COLOR)
         .configure_title(color="#1D2733", fontSize=16, anchor="start")
         .configure_view(strokeOpacity=0)
     )

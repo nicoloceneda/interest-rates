@@ -6,7 +6,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from src.charts import INSTITUTIONAL_PALETTE
+from src.charts import GRID_COLOR, INSTITUTIONAL_PALETTE
 from src.state import DashboardState
 
 
@@ -121,7 +121,7 @@ def render_macro_context_tab(state: DashboardState) -> None:
 
     st.altair_chart(
         chart.properties(height=540, title="Treasury Macro Overlay (with recession shading)")
-        .configure_axis(labelColor="#2A3647", titleColor="#2A3647", gridColor="#D7DDE5")
+        .configure_axis(labelColor="#2A3647", titleColor="#2A3647", gridColor=GRID_COLOR)
         .configure_title(color="#1D2733", fontSize=16, anchor="start")
         .configure_view(strokeOpacity=0),
         use_container_width=True,
