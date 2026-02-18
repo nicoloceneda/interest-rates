@@ -93,22 +93,22 @@ def _build_state(config: DashboardConfig) -> DashboardState:
     )
 
 
-def _render_sidebar_status(config: DashboardConfig, state: DashboardState) -> None:
-    st.sidebar.subheader("Data Status")
-    st.sidebar.write(f"GSW file: `{config.data_path}`")
-    st.sidebar.write(f"Observations: `{len(state.available_dates):,}` dates")
-    st.sidebar.write(f"Maturities: `{len(state.maturity_columns)}`")
-
-    if get_fred_api_key():
-        st.sidebar.success("FRED key detected")
-    else:
-        st.sidebar.warning("FRED key missing")
-        st.sidebar.caption("Set `FRED_API_KEY` in `.streamlit/secrets.toml` or environment.")
-
-    if state.fred_errors:
-        st.sidebar.warning("Some FRED series failed")
-        for series_id, message in sorted(state.fred_errors.items()):
-            st.sidebar.caption(f"{series_id}: {message}")
+def _render_header_with_fred_status(config: DashboardConfig) -> None:
+    header_col, status_col = st.columns([5, 2])
+    with header_col:
+        render_header(config)
+    with status_col:
+        st.markdown("<div style='height: 1.75rem;'></div>", unsafe_allow_html=True)
+        has_fred_key = bool(get_fred_api_key())
+        status_text = "FRED key detected" if has_fred_key else "FRED key missing"
+        status_color = "#16a34a" if has_fred_key else "#dc2626"
+        st.markdown(
+            (
+                "<p style='margin: 0; text-align: right; color: "
+                f"{status_color}; font-weight: 600;'>{status_text}</p>"
+            ),
+            unsafe_allow_html=True,
+        )
 
 
 def run() -> None:
@@ -117,7 +117,7 @@ def run() -> None:
     configure_page(config)
     alt.data_transformers.disable_max_rows()
     apply_theme()
-    render_header(config)
+    _render_header_with_fred_status(config)
 
     try:
         state = _build_state(config)
@@ -130,5 +130,4 @@ def run() -> None:
         st.error(f"Could not initialize dashboard data: {exc}")
         st.stop()
 
-    _render_sidebar_status(config, state)
     render_dashboard_tabs(state)

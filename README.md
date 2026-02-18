@@ -67,7 +67,7 @@ FRED_API_KEY = "your_api_key_here"
 streamlit run app.py
 ```
 
-4. Check the sidebar:
+4. Check the top-right status box in the dashboard:
 - If configured correctly, you should see `FRED key detected`.
 - If not, you will see `FRED key missing`.
 
